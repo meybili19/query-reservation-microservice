@@ -1,0 +1,16 @@
+type Reservations {
+    id: Int
+    user_id: Int
+    car_id: Int
+    parking_lot_id: Int
+    start_date: String
+    end_date: String
+    status: String
+    total_amount: Float
+  }
+  
+  type Query {
+    getReservations: [Reservations]
+    getReservation(id: Int!): Reservations
+  }
+  
