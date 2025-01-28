@@ -16,5 +16,5 @@ app.use('/reservation', graphqlHTTP({
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-  console.log(`GraphQL server running at http://localhost:${PORT}/reservation`);
+  console.log(`Query reservation running at http://localhost:${PORT}/reservation`);
 });
