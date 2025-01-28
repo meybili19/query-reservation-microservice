@@ -1,21 +1,20 @@
-const { ApolloServer } = require('apollo-server');
-const { PrismaClient } = require('@prisma/client');
-const fs = require('fs');
-const path = require('path');
-const resolvers = require('./resolvers/reservationResolver');
+const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
+const reservationSchema = require('./schema/reservationSchema');
+const reservationResolver = require('./resolvers/reservationResolver');
 
-const prisma = new PrismaClient();
+require('dotenv').config();
 
-const typeDefs = fs.readFileSync(path.join(__dirname, 'schema/reservationSchema.graphql'), 'utf-8');
+const app = express();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => {
-    return { prisma };
-  },
-});
+app.use('/reservation', graphqlHTTP({
+  schema: reservationSchema,
+  rootValue: reservationResolver,
+  graphiql: true, // Interfaz para pruebas
+}));
 
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  console.log(`Server ready at ${url}`);
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`GraphQL server running at http://localhost:${PORT}/reservation`);
 });

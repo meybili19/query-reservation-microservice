@@ -1,10 +1,12 @@
 const reservationService = require('../services/reservationService');
 
-const resolvers = {
-  Query: {
-    getReservations: async () => await reservationService.fetchAllReservations(),
-    getReservation: async (_, { id }) => await reservationService.fetchReservationById(id),
+const reservationResolver = {
+  getAllReservations: async () => {
+    return await reservationService.getAllReservations();
+  },
+  getReservationById: async ({ id }) => {
+    return await reservationService.getReservationById(id);
   },
 };
 
-module.exports = resolvers;
+module.exports = reservationResolver;
