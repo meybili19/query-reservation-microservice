@@ -10,7 +10,7 @@ const app = express();
 app.use('/reservation', graphqlHTTP({
   schema: reservationSchema,
   rootValue: reservationResolver,
-  graphiql: true, // Interfaz para pruebas
+  graphiql: true,
 }));
 
 const PORT = process.env.PORT || 4000;
