@@ -13,7 +13,6 @@ const reservationSchema = buildSchema(`
   }
 
   type Query {
-    getAllReservations: [Reservations]
     getReservationById(id: Int!): Reservations
   }
 `);
