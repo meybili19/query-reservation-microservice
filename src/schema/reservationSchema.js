@@ -12,8 +12,9 @@ const reservationSchema = buildSchema(`
     totalAmount: Float
   }
 
-  type Query {
+ type Query {
     getReservationById(id: Int!): Reservations
+    getAllReservations: [Reservations]
   }
 `);
 

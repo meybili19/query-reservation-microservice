@@ -16,4 +16,18 @@ const getReservationById = async (id) => {
   };
 };
 
-module.exports = { getReservationById };
+const getAllReservations = async () => {
+  const [rows] = await db.query('SELECT * FROM Reservations');
+  return rows.map(row => ({
+    id: row.id,
+    userId: row.user_id,
+    vehicleId: row.car_id,
+    parkingLotId: row.parking_lot_id,
+    startDate: row.start_date,
+    endDate: row.end_date,
+    status: row.status,
+    totalAmount: row.total_amount,
+  }));
+};
+
+module.exports = { getReservationById, getAllReservations };
