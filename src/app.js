@@ -8,15 +8,19 @@ require('dotenv').config();
 
 const app = express();
 
+// ✅ Configuración de CORS para permitir cualquier origen
 app.use(cors({
-  origin: "http://localhost:3000", 
-  credentials: true
+  origin: '*', // Permite peticiones desde cualquier origen
+  methods: ['GET', 'POST'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Headers permitidos
+  credentials: true // Permitir credenciales (cookies, tokens, etc.)
 }));
 
+// Middleware de GraphQL
 app.use('/reservation', graphqlHTTP({
   schema: reservationSchema,
   rootValue: reservationResolver,
-  graphiql: true, 
+  graphiql: true, // Interfaz gráfica para probar las consultas
 }));
 
 const PORT = process.env.PORT || 4003;
